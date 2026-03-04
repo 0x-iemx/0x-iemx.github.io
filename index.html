@@ -1,55 +1,160 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>ISSAM EL MOUSSAOUI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: auto;
-        }
-        h1 {
-            color: #333;
-        }
-        h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Issam El Moussaoui | Cyber Portfolio</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #00ff99;
+    font-family: "Courier New", monospace;
+    overflow-x: hidden;
+}
+
+/* Fondo animado tipo matrix */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.container {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+h2 {
+    border-bottom: 1px solid #00ff99;
+    padding-bottom: 5px;
+    margin-top: 40px;
+}
+
+.glitch {
+    color: #00ff99;
+    position: relative;
+    animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 0 red; }
+    20% { text-shadow: -2px 0 blue; }
+    40% { text-shadow: 2px 0 red; }
+    60% { text-shadow: -2px 0 blue; }
+    80% { text-shadow: 2px 0 red; }
+    100% { text-shadow: none; }
+}
+
+a {
+    color: #00ff99;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid #00ff99;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: #00ff99 }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>ISSAM EL MOUSSAOUI</h1>
-        <p><strong>Administrador de sistemas y redes</strong></p>
 
-        <h2>Sobre mí</h2>
-        <p>Escribe aquí una breve descripción profesional.</p>
+<canvas id="matrix"></canvas>
 
-        <h2>Experiencia</h2>
-        <p><strong>Empresa - Cargo</strong> (Año - Año)</p>
-        <ul>
-            <li>Responsabilidad o logro</li>
-        </ul>
+<div class="container">
 
-        <h2>Educación</h2>
-        <p>Nombre del instituto - Carrera (Año)</p>
+<h1 class="glitch">Issam El Moussaoui</h1>
 
-        <h2>Habilidades</h2>
-        <ul>
-            <li>Habilidad 1</li>
-            <li>Habilidad 2</li>
-        </ul>
+<p class="typewriter">> Cybersecurity Enthusiast | Web Developer | Tech Mind</p>
 
-        <h2>Contacto</h2>
-        <p>Email: tuemail@email.com</p>
-    </div>
+<h2>> Sobre mí</h2>
+<p>
+Apasionado por la tecnología, la ciberseguridad y el desarrollo web.
+Mentalidad analítica, aprendizaje constante y enfoque en soluciones eficientes.
+</p>
+
+<h2>> Habilidades</h2>
+<ul>
+<li>HTML / CSS</li>
+<li>Git & GitHub</li>
+<li>Linux básico</li>
+<li>Seguridad informática</li>
+<li>Resolución de problemas</li>
+</ul>
+
+<h2>> Proyectos</h2>
+<p>
+Portfolio personal alojado en GitHub Pages.<br>
+Configuración de dominios y DNS con Cloudflare.
+</p>
+
+<h2>> Contacto</h2>
+<p>
+Email: tuemail@email.com<br>
+GitHub: <a href="#">github.com/tuusuario</a>
+</p>
+
+</div>
+
+<script>
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "01";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = [];
+
+for(let x = 0; x < columns; x++)
+    drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#00ff99";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 33);
+</script>
+
 </body>
 </html>
